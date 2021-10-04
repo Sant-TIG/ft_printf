@@ -2,7 +2,7 @@
 
 
 
-# Variables Variadicas.
+# Funciones Variadicas.
 
 Las **funciones Variadicas** son aquellas que nos permiten tener un numero arbitrario de parametros de tipo arbitrario. La mas conocida en C y C++ en la funcion **printf**. 
 
@@ -14,28 +14,6 @@ int funcion2(int a, ..., int b = 0); // Correcto
 ```
 
 Durante la ejecucion de un programa, el ordenador almacena todos los parametros de la funcion variadica en el **stack**. El problema esta en poder acceder a todos esos parametros que no tienen nombre al que hacer referencia. Por eso es conveniente asignar al menos un parametro con nombre es porque sin el no se puede inicializar la referencia de parametros sin nombre.
-
-Para acceder a los parametros utilizaremos el **tipo** `va_list` junto con las **macros** `va_start` `va_arg` y `va_end`.
-
-### va_list
-
-Las variables declaradas con el tipo **va_list** son un puntero a la direccion inicial de cada argumento de la funcion. Cuando lo declaramos por primera vez se almacenará en su interior la direccion del primer argumento.
-
-```
-va_list ap; //Declaramos una variable ap de tipo va_list. En esta ya esta almacenada la direccion del primero argumento.
-```
-
-
-
-### va_start()
-
-La funcion de la macro **va_start()** con prototipo `void va_start(va_list ap, ultimo);` inicializa ap para su uso posterior por el resto de macros. **ultimo** hace referencia al ultimo argumento del que la funcion que llama conoce el tipo.
-
-Ya que la direccion de este argumento puede utilizarse en la macro **va_start()**, no debe declararse como una variable de registro, ni como una funcion o un tipo de matriz.
-
-## va_copy
-
-Esta macro copia la lista de argumentos de la variable src a dest. El comportamiento es como si va_start se aplicara a dest con el mismo ultimo argumento, seguido por el mismo numero de invocaciones de va_arg que se uso para alcanzar el estado actual de src.
 
 Una **funcion variadica** es aquella en la que desconocemos la cantidad y el tipo de parametros con los que vamos a trabajar. Su estructura es la siguiente: `tipo nombre(...)`. La propiedad de poder trabajar con un numero indefinido de argumentos viene dada por el operador **"ellipisis (...)"**.
 
