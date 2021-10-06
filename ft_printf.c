@@ -4,18 +4,17 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int	len;
+	int i = -1;
 
 	len = 0;
 	va_start(ap, format);
-	while(*format != '\0')
+	while(*(format + ++i))
 	{
-		if (*format == '%')
-		{
-			len = ft_write_specifier(ap, *++format, len);
-			format++;
-		}
+		if (*(format + i) == '%')
+			len = ft_write_specifier(ap, *(format + ++i), len);
 		else
-			len += ft_putchar_fd(*format++, 1);
+			len += ft_putchar_fd(*(format + i), 1);
+		//printf("\nEl caracter %c esta en la posicion %d\n", *(str - 1), len - 1);
 	}
 	va_end(ap);
 	return (len);
@@ -41,5 +40,9 @@ int main()
 	int* p = &len;
 	len = printf("Esto es una direccion: %p\n", p);
 	len1 = ft_printf("Esto es una direccion: %p\n", p);
+	printf("%d \t%d\n", len, len1);
+	printf("\n---ENTEGER AND DECIMAL CASE---\n");
+	len = printf("Estos son varios numeros enteros: %d, %d, %d, %d, %d, %d\n", -2147483648, 0, 214783647,-3456, 347657, 214783648);
+	len1 = ft_printf("Estos son varios numeros enteros: %d, %d, %d, %d, %d, %d\n", -2147483648, 0, 214783647,-3456, 347657, 214783648);
 	printf("%d \t%d\n", len, len1);
 }
