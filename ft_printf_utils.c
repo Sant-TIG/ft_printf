@@ -6,16 +6,10 @@
   determinada(decimal => nbase = 10 || hexadecimal => nbase = 16).
 */
 
-int	ft_len_nbase(int nbr, int nbase)
+int	ft_len_nbase(int nbr, int nbase, int len)
 {
-	int	len;
-
-	len = 0;
-	while(nbr > 0)
-	{
+	while(nbr > 0 && ++len)
 		nbr /= nbase;
-		len++;
-	}
 	return(len);
 }
 
@@ -37,7 +31,7 @@ int	ft_putlptr_fd(size_t adr, char* base)
 	if (adr >= 16)
 		ft_putlptr_fd(adr / 16, base);
 	ft_putchar_fd(base[adr % 16], 1);
-	ft_len_nbase(adr, 16);
+	ft_len_nbase(adr, 16, len);
 }
 
 /*
