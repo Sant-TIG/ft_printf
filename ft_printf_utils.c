@@ -1,5 +1,43 @@
 #include "ft_printf.h"
 
+int	ft_putlstr_fd(char *str, int fd);
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		ft_putlstr_fd("-2147483648", fd);
+		return ;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd(45, fd);
+		n *= -1;
+	}
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + 48, fd);
+}
+
+int	ft_len_nbase(int nbr, int nbase, int len);
+
+/**/
+
+int	ft_putlnbr_fd(int nbr, int fd, int len)
+{
+	ft_putnbr_fd(nbr, 1);
+	if (nbr == -2147483648)
+		return(11);
+	if (nbr == 0)
+		return(1);
+	if (nbr < 0)
+	{
+		len++;
+		nbr *= -1;
+	}
+	ft_len_nbase(nbr, 10, len);
+}
+
 /*
   La funcion ft_len_nbase() se encarga de devolver la cantidad de numeros que forman
   el numero pasado como parametro, en relacion al numero de elementos de una base
@@ -88,14 +126,9 @@ int	ft_write_specifier(va_list ap, char c, int len)
 		len += ft_putlstr_fd(va_arg(ap, char *), 1);
 	if (c == 'p')
 		len += write(1, "0x", 2) + ft_putlptr_fd(va_arg(ap, size_t), "0123456789abcdef");
-	/*if (c == 'd' || c == 'i')
-	{
-
-	}
-	if (c == 'i')
-	{
-
-	}
+	if (c == 'd' || c == 'i')
+		len += ft_putlnbr_fd(va_arg(ap, int), 1, len);
+	/*
 	if (c == 'u')
 	{
 
