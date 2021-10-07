@@ -4,17 +4,16 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int	len;
-	int i = -1;
 
 	len = 0;
 	va_start(ap, format);
-	while(*(format + ++i))
+	while(*format)
 	{
-		if (*(format + i) == '%')
-			len = ft_write_specifier(ap, *(format + ++i), len);
+		if (*format == '%')
+			len = ft_write_specifier(ap, *format, len);
 		else
 			len += ft_putchar_fd(*(format + i), 1);
-		//printf("\nEl caracter %c esta en la posicion %d\n", *(str - 1), len - 1);
+		format++;
 	}
 	va_end(ap);
 	return (len);
