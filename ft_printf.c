@@ -12,7 +12,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 			len = ft_write_specifier(ap, *format, len);
 		else
-			len += ft_putchar_fd(*(format + i), 1);
+			len += ft_putchar_fd(*format, 1);
 		format++;
 	}
 	va_end(ap);
