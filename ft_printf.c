@@ -1,4 +1,25 @@
-#include "ft_printf.h"
+#include "incs/ft_printf.h"
+
+/*
+  
+*/
+
+int	ft_write_specifier(va_list ap, char c, int len)
+{
+	if (c =='%')
+		len += ft_putlchar('%');	
+	if (c == 'c')
+		len += ft_putlchar(va_arg(ap, int));
+	if (c == 's')
+		len += ft_putlstr(va_arg(ap, char *));
+	if (c == 'p')
+		len += ft_putlptr(va_arg(ap, size_t));
+	return(len);
+}
+
+/*
+  
+*/
 
 int	ft_printf(const char *format, ...)
 {
@@ -7,12 +28,12 @@ int	ft_printf(const char *format, ...)
 
 	len = 0;
 	va_start(ap, format);
-	while(*format)
+	while (*format)
 	{
 		if (*format == '%')
-			len = ft_write_specifier(ap, *format, len);
+			len = ft_write_specifier(ap, *++format, len);
 		else
-			len += ft_putchar_fd(*format, 1);
+			len += ft_putlchar(*format);
 		format++;
 	}
 	va_end(ap);
@@ -21,27 +42,26 @@ int	ft_printf(const char *format, ...)
 
 int main()
 {
-	int len = 0, len1 = 0;
+	int	len = 0, len1 = 0;
 
 	printf("\n---NO %% CASE---\n");
-	len = printf("abcdefg\n");
-	len1 = ft_printf("abcdefg\n");
+	len = printf("Aqui no pasamos ningun parametro adicional\n");
+	len1 = ft_printf("Aqui no pasamos ningun parametro adicional\n");
+	printf("Printf = %d\tFt_printf = %d\n", len, len1);
+	printf("\n---%% CASE---\n");
+	len = printf("%%\n");
+	len1 = ft_printf("%%\n");
 	printf("%d \t%d\n", len, len1);
-	printf("\n---CHARACTER CASE---\n");
-	len = printf("Esto es un caracter: %c\n", 'c');
-	len1 = ft_printf("Esto es un caracter: %c\n", 'c');
-	printf("%d \t%d\n", len, len1);
-	printf("\n---STRING CASE---\n");
-	len = printf("Esto es una cadena: %s\n", "cadena");
-	len1 = ft_printf("Esto es una cadena: %s\n", "cadena");
-	printf("%d \t%d\n", len, len1);
-	printf("\n---POINTER CASE---\n");
-	int* p = &len;
-	len = printf("Esto es una direccion: %p\n", p);
-	len1 = ft_printf("Esto es una direccion: %p\n", p);
-	printf("%d \t%d\n", len, len1);
-	printf("\n---ENTEGER AND DECIMAL CASE---\n");
-	len = printf("Estos son varios numeros enteros: %d, %d, %d, %d, %d, %d\n", -2147483648, 0, 214783647,-3456, 347657, 214783648);
-	len1 = ft_printf("Estos son varios numeros enteros: %d, %d, %d, %d, %d, %d\n", -2147483648, 0, 214783647,-3456, 347657, 214783648);
-	printf("%d \t%d\n", len, len1);
+	ft_printf("\n---CHARACTER CASE---\n");
+	len = printf("Estos son varios caracteres: %c, %c, %c, %c, %c, %c, %c.\n", 'a','1','\0','Z',  '0' - 256, '0' + 256, ' ');
+	len1 = ft_printf("Estos son varios caracteres: %c, %c, %c, %c, %c, %c, %c.\n", 'a','1','\0','Z', '0' - 256, '0' + 256, ' ');
+	printf("Printf = %d\tFt_printf = %d\n", len, len1);
+	ft_printf("\n---SRING CASE---\n");
+	len = printf("Estas son varias cadenas: %s, %s, %s, %s, %s.\n", "", "c", "4", "cadena ", NULL);
+	len1 = ft_printf("Estas son varias cadenas: %s, %s, %s, %s, %s.\n", "", "c", "4", "cadena ", NULL);
+	printf("Printf = %d\tFt_printf = %d\n", len, len1);
+	ft_printf("\n---POINTER CASE---\n");
+	len = printf("Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
+	len1 = ft_printf("Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
+	printf("Printf = %d\tFt_printf = %d\n", len, len1);
 }
