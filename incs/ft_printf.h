@@ -8,7 +8,7 @@
 
 int	ft_putlchar(char c);
 int	ft_putlstr(char *str);
-int	ft_putlptr(size_t adr);
+int	ft_putlhex(size_t adr, char c);
 size_t ft_strlen(char *str);
 
 #endif
