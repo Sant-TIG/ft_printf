@@ -9,8 +9,6 @@ int	ft_putlhex(size_t adr, char c)
 	xbase = "0123456789abcdef";
 	Xbase = "0123456789ABCDEF";
 	len = 0;
-	if (adr == 0)
-		len++;
 	if (c == 'x' || c == 'p')
 	{
 		if (adr >= 16)
