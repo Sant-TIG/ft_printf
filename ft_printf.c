@@ -13,7 +13,9 @@ int	ft_write_specifier(va_list ap, char c, int len)
 	if (c == 's')
 		len += ft_putlstr(va_arg(ap, char *));
 	if (c == 'p')
-		len += ft_putlptr(va_arg(ap, size_t));
+		len += ft_putlstr("0x") + ft_putlhex(va_arg(ap, size_t), c);
+	if (c == 'x' || c == 'X')
+		len += ft_putlhex(va_arg(ap, unsigned int), c);
 	return(len);
 }
 
@@ -63,5 +65,9 @@ int main()
 	ft_printf("\n---POINTER CASE---\n");
 	len = printf("Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
 	len1 = ft_printf("Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
+	printf("Printf = %d\tFt_printf = %d\n", len, len1);
+	ft_printf("\n---LOWERHEX CASE---\n");
+	len = printf("Estos son varios numeros en hexadecimal txiki: %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x.\n", 0, -1, 1, 15, 16, 17, 99, 100, 101, -15, -16, -17, -99, -100, -101);
+	len1 = ft_printf("Estos son varios numeros en hexadecimal txiki: %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x.\n", 0, -1, 1, 15, 16, 17, 99, 100, 101, -15, -16, -17, -99, -100, -101);
 	printf("Printf = %d\tFt_printf = %d\n", len, len1);
 }
