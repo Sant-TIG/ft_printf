@@ -5,7 +5,7 @@ I = incs/
 NAME = ft_printf.a
 HEADER = ft_printf.h
 
-SRCS = $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
+SRCS = ft_printf.c $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
 OBJS = $(SRCS:$S%=$O%.o)
 
 CC = gcc
