@@ -2,11 +2,11 @@ S = srcs/
 O = objs/
 I = incs/
 
-NAME = libftprintf.a
+NAME = ft_printf.a
 HEADER = ft_printf.h
 
-SRCS = ft_printf.c ft_putlchar.c\
-OBJS = $(patsubst $S%, $O%.o, $(SRCS))
+SRCS = $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
+OBJS = $(SRCS:$S%=$O%.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -15,27 +15,36 @@ LIBC = ar rcs
 RM = rm -f
 RMDIR = rmdir
 
+
 all: $(NAME)
 
-$O%.o: $S%.c
-	@mkdir -p $O
+$O:
+	mkdir $@
+
+$(OBJS): | $O
+
+$(OBJS): $O%.o: $S%
 	@echo "Compiling: $<"
-	$(CC) $(CFLAGS) -I $I -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Successful compiling!"
 
 $(NAME): $(OBJS)
-	@echo "Compiling library: $<"
-	$(LIBC) $(NAME) $(OBJS)
+	@echo "Compiling library:"
+	$(LIBC) $@ $^
 	@echo "Successful compiling!"
 
-clean:
-	$(RM) $(OBJS)
-	@echo "Objects and their directory cleaned!"
+cleanobjs:
+	$(RM) $(wildcard $(OBJS))
+	@echo "Objects cleaned!"
 
-fclean: clean
+cleanobjsdir: cleanobjs
+	$(RMDIR) $O
+	@echo "Object's directory cleaned!"
+
+fclean: cleanobjsdir
 	$(RM) $(NAME)
-	@echo "Executable cleanded!"
+	@echo "Executable cleaned!"
 
-re: all clean fclean
+re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all cleanobjs cleanobjsdir fclean re
