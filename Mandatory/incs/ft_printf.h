@@ -1,11 +1,12 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <limits.h>
+#include <stddef.h>
 
+# define xbase "0123456789abcdef"
+# define Xbase "0123456789ABCDEF"
+
+int		ft_printf(const char *format, ...);
 int     ft_putlchar(char c);
 int     ft_putlstr(char *str);
 int     ft_putlnbr(int nbr);
