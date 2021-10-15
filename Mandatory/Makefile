@@ -18,7 +18,9 @@ RMDIR = rmdir
 all: $(NAME)
 
 $O:
+	@echo "Creating Objects Folder...."
 	mkdir $@
+	@echo "Folder created."
 
 $(OBJS): | $O
 
