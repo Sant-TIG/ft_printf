@@ -1,11 +1,10 @@
-S = srcs/
 O = objs/
 I = incs/
+S = srcs/
 
-NAME = ft_printf.a
-HEADER = ft_printf.h
+NAME = libftprintf.a
 
-SRCS = ft_printf.c $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
+SRCS = $Sft_printf.c $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
 OBJS = $(SRCS:$S%=$O%.o)
 
 CC = gcc
@@ -25,7 +24,7 @@ $(OBJS): | $O
 
 $(OBJS): $O%.o: $S%
 	@echo "Compiling: $<"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $< -o $@
 	@echo "Successful compiling!"
 
 $(NAME): $(OBJS)
@@ -34,7 +33,7 @@ $(NAME): $(OBJS)
 	@echo "Successful compiling!"
 
 cleanobjs:
-	$(RM) $(wildcard $(OBJS))
+	$(RM) $(OBJS)
 	@echo "Objects cleaned!"
 
 cleanobjsdir: cleanobjs
