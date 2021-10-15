@@ -6,7 +6,7 @@
 /*   By: sperez-p <sperez-p@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:31:24 by sperez-p          #+#    #+#             */
-/*   Updated: 2021/10/14 16:26:28 by sperez-p         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:12:42 by sperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../incs/ft_printf.h"
@@ -14,7 +14,6 @@
 
 static int	ft_write_specifier(va_list ap, char c, int len)
 {
-
 	if (c == 'c')
 		len += ft_putlchar(va_arg(ap, int));
 	if (c == 's')
@@ -27,15 +26,15 @@ static int	ft_write_specifier(va_list ap, char c, int len)
 		len += ft_putlunbr(va_arg(ap, unsigned int));
 	if (c == 'x' || c == 'X')
 		len += ft_putlhex(va_arg(ap, unsigned int), c);
-	if (c =='%')
-		len += ft_putlchar('%');	
-	return(len);
+	if (c == '%')
+		len += ft_putlchar('%');
+	return (len);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int	len;
+	int		len;
 
 	len = 0;
 	va_start(ap, format);

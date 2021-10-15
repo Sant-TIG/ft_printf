@@ -6,12 +6,12 @@
 /*   By: sperez-p <sperez-p@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:51:59 by sperez-p          #+#    #+#             */
-/*   Updated: 2021/10/14 15:46:49 by sperez-p         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:10:40 by sperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
 int	ft_putlchar(char c)
 {
-	return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
