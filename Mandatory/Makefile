@@ -32,11 +32,9 @@ $(NAME): $(OBJS)
 	$(LIBC) $@ $^
 	@echo "Successful compiling!"
 
-cleanobjs:
+clean:
 	$(RM) $(OBJS)
 	@echo "Objects cleaned!"
-
-cleanobjsdir: cleanobjs
 	$(RMDIR) $O
 	@echo "Object's directory cleaned!"
 
