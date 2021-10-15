@@ -44,4 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all cleanobjs cleanobjsdir fclean re
+.PHONY: all clean fclean re
