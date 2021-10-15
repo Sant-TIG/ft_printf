@@ -38,7 +38,7 @@ clean:
 	$(RMDIR) $O
 	@echo "Object's directory cleaned!"
 
-fclean: cleanobjsdir
+fclean: clean
 	$(RM) $(NAME)
 	@echo "Executable cleaned!"
 
