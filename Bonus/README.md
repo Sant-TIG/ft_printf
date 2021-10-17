@@ -1,10 +1,12 @@
 # Conversion Specifiers
 
-Un especificador de conversion es un caracter que especifica el tipo de conversion que se va aplicar a un dato. Los especficadores que se muestran mas adelante son los que especifica el subject del proyecto.
+Los especificadores de formato son utilizados durante la entrada y la salida de datos de un programa. Gracias a estos especificadores, el compilador sabe que tipo de dato hay almacenado en una variable durante el uso del printf() el scanf().
+
+Los especificadores que se muestran a continuación son solo los que se mandan analizar en el subject del proyecto.
 
 ## c
 
-
+Como sabemos, los especificadores de conversion definen el tipo de dato que va a ser impreso en la salida estandar.  Ambos son necesarios 
 
 ## d, i
 
