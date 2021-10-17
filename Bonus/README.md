@@ -8,7 +8,7 @@ La estructura de estos elementos es la siguiente: `%nombre`. El caracter `%` **s
 
 Este especificador es el responsable de interpretar los datos de tipo caracter `char`. Este toma un argumento de tipo entero `int` para despues convertirlo en uno de tipo caracter sin signo `unsigned char`. Una vez hecha la conversión, la funcion printf escribirá el caracter dado.
 
-Este especificador no admite las siguientes flags: `#` `0` `` `+`; ni tampoco admite la precision. Si se encuentra con alguna de ellas simplemente la omitirá.
+Este especificador no admite las siguientes flags: `#` `0` `space` `+`; ni tampoco admite la precision. Si se encuentra con alguna de ellas simplemente la omitirá.
 
 ## d, i
 
