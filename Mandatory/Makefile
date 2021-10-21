@@ -11,8 +11,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBC = ar rcs
 
-RM = rm -f
-RMDIR = rmdir
+RM = -rm -r
 
 
 all: $(NAME)
@@ -23,6 +22,7 @@ $O:
 	@echo "Folder created."
 
 $(OBJS): | $O
+	@echo "Declaring folder as "order-only prerequisite"
 
 $(OBJS): $O%.o: $S%
 	@echo "Compiling: $<"
@@ -35,10 +35,9 @@ $(NAME): $(OBJS)
 	@echo "Successful compiling!"
 
 clean:
-	$(RM) $(OBJS)
-	@echo "Objects cleaned!"
-	$(RMDIR) $O
-	@echo "Object's directory cleaned!"
+	$(RM) $O
+	@echo "Objects and directory cleaned!"
+
 
 fclean: clean
 	$(RM) $(NAME)
