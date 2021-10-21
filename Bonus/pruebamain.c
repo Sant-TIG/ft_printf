@@ -14,7 +14,6 @@ size_t	ft_spclen(const char *str)
 	size_t	i;
 
 	i = 0;
-	printf ("\n---SPCLEN---\n");
 	while(!ft_is_specifier(str[i]))
 		i++;
 	return (i);
@@ -24,7 +23,6 @@ size_t	ft_spclen(const char *str)
 
 int	ft_putchar(char c)
 {
-	printf ("\n---PUTCHAR---\n");
 	return (write(1, &c, 1));
 }
 
@@ -36,7 +34,6 @@ int	ft_isdigit(int c);
 
 char	*ft_get_width(const char *str)
 {
-	printf ("\n---GET WIDTH---\n");
 	size_t	i;
 	char	*dst;
 	int		nbr;
@@ -55,7 +52,6 @@ int	ft_isdigit(int c);
 
 int	ft_process_width(char *arg, const char *format, size_t len)
 {
-	printf ("\n---PROCESS WIDTH---\n");
 	int		i;
 	int		nbr;
 	char 	*str;
@@ -65,12 +61,9 @@ int	ft_process_width(char *arg, const char *format, size_t len)
 	if (ft_isdigit(format[i]))
 	{
 		str = ft_get_width(format);
-		printf ("\nstr = %s\n", str);
 		nbr = ft_atoi(str) - ft_strlen(arg);
-		printf ("\nnbr = %d\n", nbr);
 		while (nbr-- )
 			i += ft_putchar(' ');
-		printf ("\ni = %d\n", i);
 		return (i);
 	}
 	return (0);
@@ -84,7 +77,6 @@ int	ft_isdigit(int c);
 
 int	ft_atoi(const char *str)
 {
-	printf ("\n---ATOI---\n");
 	int	result;
 	int	sign;
 
@@ -109,7 +101,6 @@ int	ft_isdigit(int c);
 
 int	ft_prclen(char *str)
 {
-	printf ("\n---PRCLEN---\n");
 	size_t	i;
 
 	i = 0;
@@ -120,7 +111,6 @@ int	ft_prclen(char *str)
 
 char *ft_get_precision(const char *format)
 {
-	printf ("\n---GET PRECISION---\n");
 	char 	*str;
 	size_t	i;
 
@@ -136,13 +126,11 @@ char *ft_get_precision(const char *format)
 
 int	ft_isdigit(int c)
 {
-	printf ("\n---ISDIGIT---\n");
 	return (c >= 48 && c <= 57);
 }
 
 char *ft_process_precision(char *arg, const char *format, char id)
 {
-	printf ("\n---PROCESS PRECISION---\n");
 	size_t	i;
 	char	*str;
 	char	*prc;
@@ -150,7 +138,6 @@ char *ft_process_precision(char *arg, const char *format, char id)
 
 	i = 0;
 	nbr = 0;
-	printf("\narg = %s\tformat = %s\tid = %c", arg, format, id);
 	while (format[i] != '.' && format[i] != id)
 		i++;
 	if (format[i] == '.')
@@ -161,16 +148,12 @@ char *ft_process_precision(char *arg, const char *format, char id)
 			if (ft_isdigit(format[i]))
 			{
 				str = ft_get_precision(&format[i]);
-				printf ("\nstr = %s\n", str);
 				nbr = ft_atoi(str);
-				printf ("\nnbr = %d\n", nbr);
 				prc = (char *)malloc(sizeof(char) * nbr + 1);
 				prc[nbr] = '\0';
 				while (nbr--)
 				{
-					printf("\nnbr = %d, char = %c\n", nbr, arg[nbr]);
 					prc[nbr] = arg[nbr];
-					printf("\nchar1 = %c\n", prc[nbr]);
 				}
 				return (prc);
 			}
@@ -185,7 +168,6 @@ char *ft_process_precision(char *arg, const char *format, char id)
 
 size_t	ft_strlen(char *str)
 {
-	printf ("\n---FT_STRLEN---\n");
 	size_t	i;
 
 	i = 0;
@@ -196,23 +178,19 @@ size_t	ft_strlen(char *str)
 
 int	ft_putstr(char *str)
 {
-	printf ("\n---PUTSTR---\n");
 	return (write(1, str, ft_strlen(str)));
 }
 
 int	ft_process_string(char *arg, const char *format, char id)
 {
-	printf ("\n---PROCESS STRING---\n");
 	int		len;
 	size_t	i;
 
 	len = 0;
 	i = 0;
-	printf("\narg = %s\tformat = %s\tid = %c", arg, format, id);
 	if (!arg)
 		return (ft_putstr("(null)"));
 	arg = ft_process_precision(arg, format, id);
-	printf ("\n new arg = %s format = %s\n", arg, format);
 	if (format[i] == '-')
 	{
 		i++;
@@ -221,9 +199,8 @@ int	ft_process_string(char *arg, const char *format, char id)
 	}
 	if (ft_isdigit(format[i]))
 	{
-		printf("\n---DIGITO---\n");
-		printf("\narg = %s\tformat = %s\n", arg, &format[i]);
 		len = ft_process_width(arg, &format[i], ft_strlen(arg)) + ft_putstr(arg);
+		return (len);
 	}
 	else
 		return (ft_putstr(arg));
@@ -232,11 +209,9 @@ int	ft_process_string(char *arg, const char *format, char id)
 
 int	ft_write_specifier(va_list ap,const char *format, char id)
 {
-	printf ("\n---WRITE SPECIFIER---\n");
 	int	len;
 
 	len = 0;
-	printf ("\n format = %s y id = %c", format, id);
 	if (id == 's')
 	{
 		len = ft_process_string(va_arg(ap, char *), format, id);
@@ -251,7 +226,6 @@ int	ft_is_specifier(char c)
 
 char	ft_identify_specifier(const char *str, int i)
 {
-	printf ("\n---IDENTYFY SPECIFIER---\n");
 	while(!ft_is_specifier(str[i]))
 		i++;
 	return (str[i]);
@@ -271,17 +245,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] != '%')
 		{
-			printf ("\n---ESTOY EN %%---\n");
 			id = ft_identify_specifier(format, i);
-			printf ("\n id = %c\n", id);
 			format_len = ft_write_specifier(ap, &format[i + 1], id) + i;
-			printf("\n%ld y %s\n", i, &format[i]);
 			i += ft_spclen(&format[i]) + 1;
-			printf("\n%ld y %s\n", i, &format[i]);
 		}
 		else
 		{
-			printf ("\n---NO ESTOY EN %%\n");
 			i += ft_putchar(format[i]);
 			format_len++;
 		}
@@ -292,8 +261,8 @@ int	ft_printf(const char *format, ...)
 
 int main ()
 {
-	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "string");
-	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "string");
+	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "cadena");
+	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "cadena");
 	printf ("Printf = %d ft_printf = %d", len , len1);
 	return (0);
 }
