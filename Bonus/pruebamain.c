@@ -189,7 +189,19 @@ int	ft_process_string(char *arg, const char *format, char id)
 	len = 0;
 	i = 0;
 	if (!arg)
+	{
+		if (format[i] == '-')
+		{
+			len = ft_putstr("(null)") + ft_process_width("(null)", &format[i], 6);
+			return (len);
+		}
+		if (ft_isdigit(format[i]))
+		{
+			len = ft_process_width("(null)", &format[i], 6) + ft_putstr("(null)");
+			return (len);
+		}
 		return (ft_putstr("(null)"));
+	}
 	arg = ft_process_precision(arg, format, id);
 	if (format[i] == '-')
 	{
@@ -246,7 +258,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] != '%')
 		{
 			id = ft_identify_specifier(format, i);
-			format_len = ft_write_specifier(ap, &format[i + 1], id) + i;
+			format_len += ft_write_specifier(ap, &format[i + 1], id);
 			i += ft_spclen(&format[i]) + 1;
 		}
 		else
@@ -261,8 +273,11 @@ int	ft_printf(const char *format, ...)
 
 int main ()
 {
-	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "cadena");
-	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "cadena");
+	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
+	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
+	printf ("Printf = %d ft_printf = %d\n", len , len1);
+	len = printf("Esto es una cadena: %.4s y esta es otra: %-.5s y esta es otra: %10s|\n", "cadena", "string", NULL);
+	len1 = ft_printf("Esto es una cadena: %.4s y esta es otra: %-.5s y esta es otra: %10s|\n", "cadena", "string", NULL);
 	printf ("Printf = %d ft_printf = %d", len , len1);
 	return (0);
 }

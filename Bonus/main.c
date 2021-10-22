@@ -262,7 +262,7 @@ int	ft_printf(const char *format, ...)
 	va_list ap;
 	char	id;
 	size_t	i;
-	size_t	format_len;
+	int	format_len;
 
 	i = 0;
 	format_len = 0;
@@ -274,8 +274,8 @@ int	ft_printf(const char *format, ...)
 			printf ("\n---ESTOY EN %%---\n");
 			id = ft_identify_specifier(format, i);
 			printf ("\n id = %c\n", id);
-			format_len = ft_write_specifier(ap, &format[i + 1], id) + i;
-			printf("\n%ld y %s\n", i, &format[i]);
+			format_len += ft_write_specifier(ap, &format[i + 1], id);
+			printf("\n%ld y %s y  formatlen = %d\n", i, &format[i], format_len);
 			i += ft_spclen(&format[i]) + 1;
 			printf("\n%ld y %s\n", i, &format[i]);
 		}
@@ -284,6 +284,7 @@ int	ft_printf(const char *format, ...)
 			printf ("\n---NO ESTOY EN %%\n");
 			i += ft_putchar(format[i]);
 			format_len++;
+			printf ("\nformatlen = %d\n", format_len);
 		}
 	}
 	va_end(ap);
@@ -292,8 +293,8 @@ int	ft_printf(const char *format, ...)
 
 int main ()
 {
-	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "string");
-	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s|\n", "cadena", "string");
+	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", "");
+	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", "");
 	printf ("Printf = %d ft_printf = %d", len , len1);
 	return (0);
 }
