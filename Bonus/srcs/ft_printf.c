@@ -18,7 +18,7 @@ static int	ft_write_specifier(va_list ap,const char *format, char id)
 
 	len = 0;
 	if (id == 'c')
-		len = ft_process_character(va_arg(ap, int), format, id);
+		len = ft_process_char(va_arg(ap, int), format);
 	if (id == 's')
 		len = ft_process_string(va_arg(ap, char *), format, id);
 	return (len);

@@ -1,17 +1,105 @@
 #include "../incs/ft_printf_bonus.h"
 #include <stdio.h>
 
-int main ()
+int main()
 {
-	int len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
-	int len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
+    ft_printf("\n-----CHARACTER CASE-----\n");
+    ft_printf("\nPrintf\n");
+    int len = printf("%c ... %c\n", 'a', 'Z');
+    ft_printf("\nFt_printf\n");
+    int len1 = ft_printf("%c ... %c\n", 'a', 'Z');
+    ft_printf("\nPrintf\n");
+    len += printf("\t%c ... %c\n", '0', '9');
+    ft_printf("\nFt_printf\n");
+    len1 += ft_printf("\t%c ... %c\n", '0', '9');
+    ft_printf("\nPrintf\n");
+    len += printf("    %c ... %c\n", '0' + 256, '0' - 256);
+    ft_printf("\nFt_printf\n");
+    len1 += ft_printf("    %c ... %c\n", '0' + 256, '0' - 256);
+    printf("Printf = %d Ft_printf = %d\n", len , len1);
+    ft_printf("\n-----CHARACTER BONUS CASE-----\n");
+    ft_printf("\nPrintf\n");
+    len = printf("%10c ... %10c\n", 'a', 'Z');
+    ft_printf("\nFt_printf\n");
+    len1 = ft_printf("%10c ... %10c\n", 'a', 'Z');
+    ft_printf("\nPrintf\n");
+    len += printf("\t%-10c ... %-10c\n", '0', '9');
+    ft_printf("\nFt_printf\n");
+    len1 += ft_printf("\t%-10c ... %-10c\n", '0', '9');
+    ft_printf("\nPrintf\n");
+    len += printf("    10%c ... 10%c\n", '0' + 256, '0' - 256);
+    ft_printf("\nFt_printf\n");
+    len1 += ft_printf("    10%c ... 10%c\n", '0' + 256, '0' - 256);
+	printf("Printf = %d Ft_printf = %d\n", len , len1);
+	ft_printf("\n-----STRING CASE-----\n");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	printf("\nPrintf = %d Ft_printf = %d\n", len , len1);
+	ft_printf("\nPrintf\n");
+	len += printf(" %s\n", "c");
+	ft_printf("\nFt_printf\n");
+	len1 += ft_printf(" %s", "c");
+	printf("\nPrintf = %d Ft_printf = %d\n", len , len1);
+	ft_printf("\nPrintf\n");
+	len += printf(" %s \n", "4");
+	ft_printf("\nFt_printf\n");
+	len1 += ft_printf(" %s ", "4");
+	printf("\nPrintf = %d Ft_printf = %d\n", len , len1);
+	ft_printf("\nPrintf\n");
+	len += printf("\t%s \n", "cadena");
+	ft_printf("\nFt_printf\n");
+	len1 += ft_printf("\t%s ", "cadena");
+	printf("\nPrintf = %d Ft_printf = %d\n", len , len1);
+	ft_printf("\nPrintf\n");
+	len += printf("\n10%s10\n", NULL);
+	ft_printf("\nFt_printf\n");
+	len1 += ft_printf("\n10%s10\n", NULL);
+	printf("\nPrintf = %d Ft_printf = %d\n", len , len1);
+	/*ft_printf("\n-----STRING BONUS CASE-----\n");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	ft_printf("\nPrintf\n");
+	len = printf("%s", "");
+	ft_printf("\nFt_printf\n");
+	len1 = ft_printf("%s", "");
+	printf("Printf = %d Ft_printf = %d\n", len , len1);
+	len = printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
+	len1 = ft_printf("Esto es una cadena: %10.4s y esta es otra: %-7.5s y esta es otra: %s|\n", "cadena", "string", NULL);
 	printf ("Printf = %d ft_printf = %d\n", len , len1);
 	len = printf("Esto es una cadena: %.4s y esta es otra: %-.5s y esta es otra: %10s|\n", "cadena", "string", NULL);
 	len1 = ft_printf("Esto es una cadena: %.4s y esta es otra: %-.5s y esta es otra: %10s|\n", "cadena", "string", NULL);
-	printf ("Printf = %d ft_printf = %d", len , len1);
+	printf ("Printf = %d ft_printf = %d", len , len1);*/
 	return (0);
-}
 
+}
 
 /*
 int main()
