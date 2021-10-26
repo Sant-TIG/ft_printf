@@ -1,7 +1,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 # define XBASE "0123456789abcdef"
 # define UPXBASE "0123456789ABCDEF"
