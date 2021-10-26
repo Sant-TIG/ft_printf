@@ -3,8 +3,8 @@
 
 #include <stddef.h>
 
-# define xbase "0123456789abcdef"
-# define Xbase "0123456789ABCDEF"
+# define XBASE "0123456789abcdef"
+# define XBASEUP "0123456789ABCDEF"
 
 int		ft_printf(const char *format, ...);
 int     ft_putlchar(char c);
