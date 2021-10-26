@@ -29,6 +29,11 @@ int main()
 	ft_printf("FT --> %%-10u == %-10u|\n", 42);
 	printf("Or --> %%+--+10u == %+--+10u|\n", 42);
 	ft_printf("FT --> %%+--+10u == %+--+10u|\n", 42);
+	printf("Or --> %%.u == %.u|\n", 42);
+	//ft_printf("FT --> %%+--+10u == %+--+10u|\n", 42);
+	printf("Or --> %%.3u == %-.10u|\n", 42); //si hay precision, de 0 a lo que sea, se anulan el resto de flags
+
+
 	printf("-42\n");
 	printf("Or --> %%u == %u|\n", -42);
 	ft_printf("FT --> %%u == %u|\n", -42);
