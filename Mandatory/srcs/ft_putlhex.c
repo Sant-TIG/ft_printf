@@ -27,7 +27,7 @@ int	ft_putlhex(size_t adr, char c)
 	{
 		if (adr >= 16)
 			len += ft_putlhex(adr / 16, c);
-		len += ft_putlchar(BASEX[adr % 16]);
+		len += ft_putlchar(UPXBASE[adr % 16]);
 		return (len);
 	}
 	return (0);
