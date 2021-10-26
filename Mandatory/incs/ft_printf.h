@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 # define XBASE "0123456789abcdef"
-# define XBASEUP "0123456789ABCDEF"
+# define UPXBASE "0123456789ABCDEF"
 
 int		ft_printf(const char *format, ...);
 int     ft_putlchar(char c);
