@@ -18,32 +18,32 @@ int main()
 	printf("Or --> %%-010u == %-010u|\n", 42);
 	ft_printf("FT --> %%-010u == %-010u|\n", 42);
 	printf("Or --> %%0-10u == %0-10u|\n", 42);
-	//ft_printf("FT --> %010u\n", 42);
+	ft_printf("FT --> %%0-10u == %0-10u|\n", 42);
 	printf("Or --> %%-+0-10u == %-+0-10u|\n", 42); // si aparece - tanto 0 como + se omiten
-	//ft_printf("FT --> %010u\n", 42);
+	ft_printf("FT --> %%-+0-10u == %-+0-10u|\n", 42);
 	printf("Or --> %%10u == %10u|\n", 42);
 	ft_printf("FT --> %%10u == %10u|\n", 42);
 	printf("Or --> %%+10u == %+10u|\n", 42);
-	//ft_printf("FT --> %0u\n", 42);
+	ft_printf("FT --> %%+10u == %+10u|\n", 42);
 	printf("Or --> %%-10u == %-10u|\n", 42);
-	//ft_printf("FT --> %010u\n", 42);
+	ft_printf("FT --> %%-10u == %-10u|\n", 42);
 	printf("Or --> %%+--+10u == %+--+10u|\n", 42);
-	//ft_printf("FT --> %010u\n", 42);
+	ft_printf("FT --> %%+--+10u == %+--+10u|\n", 42);
 	printf("-42\n");
-	printf("Or --> %u\n", -42);
-	ft_printf("FT --> %u\n", -42);
-	printf("Or --> %0u\n", -42);
-	//ft_printf("FT --> %0u\n", 42);
-	printf("Or --> %010u\n", -42);
-	//ft_printf("FT --> %010u\n", 42);
-	printf("Or --> %+010u\n", -42);
-	//ft_printf("FT --> %010u\n", 42);
-	printf("Or --> %-010u\n", -42);
-	//ft_printf("FT --> %010u\n", 42);
-	printf("Or --> %0-10u\n", -42);
-	//ft_printf("FT --> %010u\n", 42);
-	printf("Or --> %-+0-10u\n", -42); // si aparece - tanto 0 como + se omiten
-	//ft_printf("FT --> %010u\n", 42);
+	printf("Or --> %%u == %u|\n", -42);
+	ft_printf("FT --> %%u == %u|\n", -42);
+	printf("Or --> %%0u == %0u|\n", -42);
+	ft_printf("FT --> %%0u == %0u|\n", -42);
+	printf("Or --> %%010u == %010u|\n", -42);
+	ft_printf("FT --> %%010u == %010u|\n", -42);
+	printf("Or --> %%+010u == %+010u|\n", -42);
+	ft_printf("FT --> %%+010u == %+010u|\n", -42);
+	printf("Or --> %%-010u == %-010u|\n", -42);
+	ft_printf("FT --> %%-010u == %-010u|\n", -42);
+	printf("Or --> %%0-10u == %0-10u|\n", -42);
+	ft_printf("FT --> %%0-10u == %0-10u|\n", -42);
+	printf("Or --> %%-+0-10u == %-+0-10u|\n", -42); // si aparece - tanto 0 como + se omiten
+	ft_printf("FT --> %%-+0-10u == %-+0-10u|\n", -42);
 	printf("-42\n");
 
 	printf("Or --> Kashim a %u histoires à raconter\n", 1001);
