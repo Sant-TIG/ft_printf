@@ -1,7 +1,7 @@
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 int		ft_atoi(const char *str);
 int		ft_check_minus(const char *format, char id);
