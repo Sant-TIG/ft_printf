@@ -1,4 +1,6 @@
 #include "incs/ft_printf.h"
+#include <stdio.h>
+#include <limits.h>
 
 int main()
 {
@@ -23,7 +25,7 @@ int main()
 	ft_printf("\n---POINTER CASE---\n");
 	len = printf("Printf: Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
 	len1 = ft_printf("Ft_printf: Estas son varias direcciones: %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p.\n", 0, 0, NULL, NULL, -1, 1, 15, 16, 17, LONG_MAX, LONG_MIN, INT_MAX, INT_MIN, ULLONG_MAX, -ULONG_MAX);
-	printf("Printf = %d\tFt_printf = %d\n", len, len1);
+	printf("Printf = %d\tFt_printf = %d\n", len, len1 - 3);
 	ft_printf("\n---LOWERHEX CASE---\n");
 	len = printf("Printf: Estos son varios numeros en hexadecimal txiki: %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x.\n", 0, -1, 1, 15, 16, 17, 99, 100, 101, -15, -16, -17, -99, -100, -101);
 	len1 = ft_printf("Ft_printf: Estos son varios numeros en hexadecimal txiki: %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x.\n", 0, -1, 1, 15, 16, 17, 99, 100, 101, -15, -16, -17, -99, -100, -101);
