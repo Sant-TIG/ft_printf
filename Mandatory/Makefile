@@ -4,7 +4,7 @@ S = srcs/
 
 NAME = libftprintf.a
 
-SRCS = $Sft_printf.c $Sft_putlchar.c $Sft_putlhex.c $Sft_putlnbr.c $Sft_putlstr.c $Sft_putlunbr.c $Sft_strlen.c
+SRCS = $Sft_printf.c $Sft_putchar.c $Sft_puthex.c $Sft_putnbr.c $Sft_putstr.c $Sft_putunbr.c $Sft_strlen.c
 OBJS = $(SRCS:$S%=$O%.o)
 
 CC = gcc
@@ -12,7 +12,6 @@ CFLAGS = -Wall -Wextra -Werror
 LIBC = ar rcs
 
 RM = -rm -r
-
 
 all: $(NAME)
 
@@ -22,11 +21,10 @@ $O:
 	@echo "Folder created."
 
 $(OBJS): | $O
-	@echo "Declaring folder as "order-only prerequisite"
 
 $(OBJS): $O%.o: $S%
 	@echo "Compiling: $<"
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Successful compiling!"
 
 $(NAME): $(OBJS)
@@ -45,4 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all fclean clean re
