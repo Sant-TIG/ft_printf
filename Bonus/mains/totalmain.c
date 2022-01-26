@@ -45,9 +45,9 @@ int	ft_str_bonus_test(char *str)
 	orlen += printf("OR --> %%-10s = %-10s | %%-3s = %-3s | %%-s = %-s |\n", str, str, str);
 	ftlen += ft_printf("FT --> %%-10s = %-10s | %%-3s = %-3s | %%-s = %-s |\n", str, str, str);
 	orlen = printf("\nOR --> %%10.3s = %10.3s | %%3.10s = %3.10s | %%.s = %.s|\n", str, str, str);
-	//ftlen = ft_printf("FT --> %%10.3s = %10.3s | %%3.10s = %3.10s | %%0.s = %0.s|\n", str, str, str);	
+	ftlen = ft_printf("FT --> %%10.3s = %10.3s | %%3.10s = %3.10s | %%.s = %.s|\n", str, str, str);	
 	orlen += printf("OR --> %%-10.3s = %-10.3s | %%-3.10s = %-3.10s | %%-.0s = %-.0s |\n", str, str, str);
-	//ftlen += ft_printf("FT --> %%-10.3s = %-10.3s | %%-3.10s = %-3.10s | %%-.0s = %-.0s |\n", str, str, str);
+	ftlen += ft_printf("FT --> %%-10.3s = %-10.3s | %%-3.10s = %-3.10s | %%-.0s = %-.0s |\n", str, str, str);
 	printf("Printf: %d Ft_printf: %d\n", --orlen, ftlen);
 	if (orlen == ftlen)
 		return (1);
