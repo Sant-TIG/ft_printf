@@ -4,6 +4,8 @@ void	ft_process_string(char *str, t_print *flags)
 {
 	if (!str)
 		str = ft_strndup("(null)", 6);
+	//if (flags->precision != 0)
+		//str = ft_process_precision(flags, str);
 	if (flags->sign == '-')
 		flags->len += ft_putstr(str) + ft_process_width(flags, str);
 	else if (flags->width != 0)

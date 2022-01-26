@@ -17,5 +17,6 @@ int	ft_atoi(const char *str)
 	}
 	while (ft_isdigit(*str))
 		result = (*str++ - 48) + (result * 10);
+	//printf("reslt = %d",result);
 	return (result * sign);
 }

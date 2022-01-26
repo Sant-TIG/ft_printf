@@ -13,10 +13,6 @@ static size_t	ft_spclen(const char *str)
 
 void	ft_write_specifier(va_list ap, t_print *flags)
 {
-	if (flags->id == 'c')
-		ft_process_char(va_arg(ap, int), flags);
-	else if (flags->id == 's')
-		ft_process_string(va_arg(ap, char *), flags);
 	if (flags->id == 'u')
 		ft_process_uint(va_arg(ap, int), flags);
 }
@@ -28,6 +24,7 @@ void	ft_init_flags(t_print *flags)
 	flags->width = 0;
 	flags->len = 0;
 	flags->precision = 0;
+	flags->zero = 0;
 }
 
 int	ft_printf(const char *format, ...)

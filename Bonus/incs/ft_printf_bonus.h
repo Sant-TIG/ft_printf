@@ -2,7 +2,7 @@
 # define FT_PRINTF_BONUS_H
 
 # include <stdlib.h>
-
+# include <stdio.h>
 typedef struct s_print
 {
 	char	sign;
@@ -10,6 +10,7 @@ typedef struct s_print
 	char	id;
 	int		len;
 	int		precision;
+	int		zero;
 } t_print;
 
 /* CHAR FUNCTIONS */
@@ -21,6 +22,11 @@ void	ft_process_char(int c, t_print *flags);
 
 void	ft_process_string(char *str, t_print *flags);
 int		ft_putstr(char *str);
+
+/* UNSIGNED INT FUNCTIONS */
+
+void	ft_process_uint(unsigned int unbr, t_print *flags);
+int		ft_putunbr(unsigned int unbr);
 
 /*CONVERSION FUNCTIONS*/
 
@@ -36,8 +42,9 @@ int	ft_printf(const char *format, ...);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 char	*ft_strcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strndup(const char *str, size_t len);
+char	*ft_uitoa(unsigned int unbr);
 
 /* WIDTH FUNCTIONS */
 
@@ -47,6 +54,6 @@ int		ft_process_width(t_print *flags, char*str);
 /* PRECISION FUNCTIONS */
 
 char	*ft_get_precision(const char *str);
-int		ft_process_precision(t_print *flags, char*str);
+char 	*ft_process_precision(t_print *flags, char *arg);
 
 #endif
