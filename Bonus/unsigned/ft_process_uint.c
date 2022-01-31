@@ -1,6 +1,7 @@
 #include "../incs/ft_printf_bonus.h"
 #include <stdio.h>
-char	*ft_process_precision_uint(t_print *flags, char *unbr_str)
+
+char	*ft_process_precision_uint(t_bonus *flags, char *unbr_str)
 {
 	//printf("precisionn =%d",ft_strlen(unbr_str) + (flags->precision - ft_strlen(unbr_str)));
 	//printf("\nPROCESS PRECISION UINT\n");
@@ -27,24 +28,34 @@ char	*ft_process_precision_uint(t_print *flags, char *unbr_str)
 	//printf("\nnew_str_nbr = %s\n", new_nbr_str);
 	return (new_nbr_str);
 }
-
-void	ft_process_uint(unsigned int unbr, t_print *flags)
+void	ft_process_uint(unsigned int unbr, t_bonus *flags)
 {
 	char	*unbr_str;
 
 	unbr_str = ft_uitoa(unbr);
 	if ((flags->precision == 0 && unbr == 0))
-		unbr_str = "";
-	else if (flags->precision > ft_strlen(unbr_str))
-		unbr_str = ft_process_precision_uint(flags, unbr_str);
-	//printf("\nunbr_str = %s\n", unbr_str);
-	if (flags->sign == '-')
-		flags->len += ft_putstr(unbr_str) + ft_process_width(flags, unbr_str);
-	else if (flags->width > 0 || flags->zero == 1)
 	{
-		//printf("\nZEROOOO2\n");
-		flags->len += ft_process_width(flags, unbr_str) + ft_putstr(unbr_str);
+		if (flags->width > 0)
+			flags->len += ft_process_width(unbr_str, flags) + ft_putstr("");
+		else
+			flags->len += ft_putstr("");
+		free(unbr_str);
 	}
 	else
-		flags->len += ft_putstr(unbr_str);
+	{
+		if (flags->precision > ft_strlen(unbr_str))
+			unbr_str = ft_process_precision_uint(flags, unbr_str);
+		//printf("\nunbr_str = %s\n", unbr_str);
+		if (flags->minus == 1)
+			flags->len += ft_putstr(unbr_str) + ft_process_width(unbr_str, flags);
+		else if (flags->width > 0 || flags->zero == 1)
+		{
+			//printf("\nZEROOOO2\n");
+			flags->len += ft_process_width(unbr_str, flags) + ft_putstr(unbr_str);
+		}
+		else
+			flags->len += ft_putstr(unbr_str);
+		free(unbr_str);
+	}
+		
 }
