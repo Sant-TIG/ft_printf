@@ -6,6 +6,7 @@ char	*ft_get_width(const char *str)
 	size_t	j;
 	char	*dst;
 	
+	//printf("str = %s\n", str);
 	i = 0;
 	j = 0;
 	while (str[i] == '0')
