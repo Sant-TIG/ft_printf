@@ -11,6 +11,8 @@ void	ft_control_flags(const char *format, t_bonus *flags)
 		if (*format == '-')
 			ft_control_minus(&format, flags);
 		//printf("%d\n", flags->minus);
+		if (*format == '0')
+			ft_control_zero(&format, flags);
 		if (ft_isdigit(*format))
 			ft_control_width(&format, flags);
 		//printf("%d\n", flags->width);
