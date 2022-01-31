@@ -10,8 +10,13 @@ void	ft_control_flags(const char *format, t_bonus *flags)
 	{
 		if (*format == '-')
 			ft_control_minus(&format, flags);
+		//printf("%d\n", flags->minus);
 		if (ft_isdigit(*format))
 			ft_control_width(&format, flags);
+		//printf("%d\n", flags->width);
+		if (*format == '.')
+			ft_control_precision(&format, flags);
+		//printf("%d\n", flags->precision);
 	}
 	if (ft_is_specifier(*format))
 		flags->id = *format;
