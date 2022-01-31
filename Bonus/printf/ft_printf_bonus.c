@@ -1,58 +1,29 @@
 #include <stdarg.h>
 #include "../incs/ft_printf_bonus.h"
 
-static size_t	ft_spclen(const char *str)
+int ft_printf(const char *format, ...)
 {
-	size_t	i;
-
-	i = 0;
-	while(!ft_is_specifier(str[i]))
-		i++;
-	return (i);
-}
-
-void	ft_write_specifier(va_list ap, t_print *flags)
-{
-	if (flags->id == 'c')
-		ft_process_char(va_arg(ap, int), flags);
-	else if (flags->id == 's')
-		ft_process_string(va_arg(ap, char *), flags);
-	if (flags->id == 'u')
-		ft_process_uint(va_arg(ap, int), flags);
-}
-
-void	ft_init_flags(t_print *flags)
-{
-	flags->sign = 0;
-	flags->id = 0;
-	flags->width = 0;
-	flags->len = 0;
-	flags->precision = 0;
-}
-
-int	ft_printf(const char *format, ...)
-{
+	//printf("PRINTF\n");
 	va_list	ap;
-	t_print	flags;
-	size_t	i;
+	t_bonus	flags;
 
-	i = 0;
 	va_start(ap, format);
-	ft_init_flags(&flags);
-	while (format[i])
+	ft_init_struct(&flags);
+	while (*format)
 	{
-		if (format[i] == '%' && format[++i] != '%')
-		{	
-			ft_control_conversion(&flags, &format[i]);
+		if (*format == '%' && *++format != '%')
+		{
+			//printf("format = %s\n", format);
+			ft_control_flags(format, &flags);
 			ft_write_specifier(ap, &flags);
-			i += ft_spclen(&format[i]);
+			format = ft_spclen(format);
+			//printf("format = %s\n", format);
 		}
 		else
-		{
-			ft_putchar(format[i]);
-			flags.len++;
-		}
-		i++;
+			flags.len += ft_putchar(*format);
+		//printf("*format = %c\n", *format);
+		format++;
+		//printf("format = %s\n", format);
 	}
-	return(flags.len);
+	return (flags.len);
 }
