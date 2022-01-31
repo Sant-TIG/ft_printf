@@ -5,7 +5,7 @@ void	ft_write_specifier(va_list ap, t_bonust *flags)
 	if (flags->id == 'c')
 		ft_process_char(va_arg(ap, int), flags);
 	else if (flags->id == 's')
-		ft_process_string(va_arg(ap, char *), flags);
+		ft_process_str(va_arg(ap, char *), flags);
 	/*else if (flags->id == 'p')
 		ft_process_pointer(va_arg(ap, unsigned long long), flags);
 	if (flags->id == 'u')
