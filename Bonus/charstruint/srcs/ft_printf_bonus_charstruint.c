@@ -53,6 +53,7 @@ void	ft_init_flags(t_bonus *flags)
 	flags->space = 0;
 	flags->precision = -1;
 	flags->zero = 0;
+	flags->hastack = 0;
 }
 
 int	ft_atoi(const char *str)
@@ -223,6 +224,58 @@ char	*ft_strndup(const char *str, size_t len)
 	return (dst);
 }
 
+size_t	ft_hexlen(unsigned int hex)
+{
+	size_t	hex_len;
+
+	hex_len = 0;
+	while (hex > 0)
+	{
+		hex /= 16;
+		hex_len++;
+	}
+	return (hex_len);
+}
+
+char	*ft_charconv_hex(char *str, unsigned int unbr, size_t unbr_len, t_bonus *flags)
+{
+	if (flags->id == 'x' || flags->id == 'p')
+	{
+		if (unbr == 0)
+			*str = LOWERXBASE[unbr % 16];
+		while (unbr > 0)
+		{
+			*(str + unbr_len--) = LOWERXBASE[unbr % 16];
+			unbr /= 16;
+		}
+		return (str);
+	}
+	if (unbr == 0)
+		*str = UPPERXBASE[unbr % 16];
+	while (unbr > 0)
+	{
+		*(str + unbr_len--) = UPPERXBASE[unbr % 16];
+		unbr /= 16;
+	}
+	return (str);
+}
+
+char	*ft_hextoa(unsigned int hex, t_bonus *flags)
+{
+	char	*hex_str;
+	size_t	hex_len;
+
+	/*if (hex == 0)
+		return ("0");*/
+	hex_len = ft_hexlen(hex);
+	hex_str = (char *)malloc(sizeof(char) * hex_len + 1);
+	if (!hex_str)
+		return (NULL);
+	*(hex_str + hex_len--) = '\0';
+	hex_str = (ft_charconv_hex(hex_str, hex, hex_len, flags));
+	return (hex_str);
+}
+
 size_t	ft_uintlen(unsigned int unbr)
 {
 	size_t	unbr_len;
@@ -263,7 +316,54 @@ char	*ft_uitoa(unsigned int unbr)
 	//printf("\ndest = %s\n", dest);
 	return (dest);
 }
+void 	ft_process_hex(unsigned int hex, t_bonus *flags)
+{
+	char	*hex_str;
 
+	hex_str = ft_hextoa(hex, flags);
+	if ((flags->precision == 0 && hex == 0) && flags->hastack == 0)
+	{
+		if ((flags->width > 0 || flags->zero == 1))
+			flags->len += ft_process_width(hex_str, flags) + ft_putstr("");
+		else
+			flags->len += ft_putstr("");
+		free(hex_str);
+	}
+	else
+	{
+		if (flags->precision > ft_strlen(hex_str))
+			hex_str = ft_process_precision_uint(flags, hex_str);
+		//printf("\nunbr_str = %s\n", unbr_str);
+		if (flags->minus == 1 && flags->width == -1)
+			flags->len += ft_putstr(hex_str);
+		else if (flags->hastack == 1 && hex != 0)
+		{
+			if (flags->id == 'X' && hex != 0)
+				flags->len += ft_putstr("0X") + ft_putstr(hex_str) + ft_process_width(hex_str, flags);
+			else if (flags->id == 'x' && hex != 0)
+				flags->len += ft_putstr("0x") + ft_putstr(hex_str) + ft_process_width(hex_str, flags);
+		}
+		else if (flags->hastack == 1 && hex == 0)
+		{
+			if (flags->id == 'X')
+				flags->len += ft_putstr("0") + ft_process_width(hex_str, flags);
+			else if (flags->id == 'x')
+				flags->len += ft_putstr("0") + ft_process_width(hex_str, flags);
+			
+		}
+		else if (flags->width > 0)
+		{
+			if (flags->minus == 1)
+				flags->len += ft_putstr(hex_str) + ft_process_width(hex_str, flags);
+			else
+			//printf("\nZEROOOO2\n");
+				flags->len += ft_process_width(hex_str, flags) + ft_putstr(hex_str);
+		}
+		else
+			flags->len += ft_putstr(hex_str);
+		free(hex_str);
+	}
+}
 void	ft_process_uint(unsigned int unbr, t_bonus *flags)
 {
 	char	*unbr_str;
@@ -271,7 +371,7 @@ void	ft_process_uint(unsigned int unbr, t_bonus *flags)
 	unbr_str = ft_uitoa(unbr);
 	if ((flags->precision == 0 && unbr == 0))
 	{
-		if (flags->width > 0)
+		if (flags->width > 0 || flags->zero == 1)
 			flags->len += ft_process_width(unbr_str, flags) + ft_putstr("");
 		else
 			flags->len += ft_putstr("");
@@ -358,6 +458,8 @@ void	ft_write_specifier(va_list ap, t_bonus *flags)
 		ft_process_str(va_arg(ap, char *), flags);
 	if (flags->id == 'u')
 		ft_process_uint(va_arg(ap, unsigned int), flags);
+	if (flags->id == 'x' || flags->id == 'X')
+		ft_process_hex(va_arg(ap, unsigned int), flags);
 }
 
 char	*ft_spclen(const char *str)
@@ -437,6 +539,11 @@ void	ft_control_flags(const char *format, t_bonus *flags)
 	//printf("format = %s\n", format);
 	while (!ft_is_specifier(*format) && *format != '%')
 	{
+		if (*format == '#')
+		{
+			flags->hastack = 1;
+			format++;
+		}
 		if (*format == '-')
 			ft_control_minus(&format, flags);
 		//printf("%d\n", flags->minus);
